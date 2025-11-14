@@ -5,7 +5,6 @@
     <title>Modelos 3D - MUNDO 3D</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mol.css">
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
@@ -1035,25 +1034,33 @@ function finalizarCompra() {
     const cp = document.getElementById('inputCP').value.trim();
     const localidad = document.getElementById('inputLocalidad').value.trim();
 
-    if (!nombre || !apellido || !telefono || !cp || !localidad) {
+    if (!nombre||!apellido||!telefono||!cp||!localidad) {
         alert('Complete todos los campos');
         return;
     }
 
-    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+    const carrito = JSON.parse(localStorage.getItem('carrito')||'[]');
+    const total = carrito.reduce((s,i)=>s+i.precio,0);
 
     const pedido = {
         id: Date.now(),
         fecha: new Date().toLocaleString('es-AR'),
-        cliente: { nombre, apellido, telefono, cp, localidad },
+        cliente: {nombre,apellido,telefono,cp,localidad},
         productos: carrito,
         total: total
     };
 
     historialRef.push(pedido);
     localStorage.removeItem('carrito');
-    alert('¡Pedido confirmado! Gracias ' + nombre);
+
+    const mensaje = encodeURIComponent(
+        `¡NUEVO PEDIDO!\n\n${nombre} ${apellido}\nTel: ${telefono}\n${localidad} (${cp})\n\nProductos:\n` +
+        carrito.map(p=>`• ${p.nombre} - $${p.precio}`).join('\n') +
+        `\n\nTOTAL: $${total} ARS\n${pedido.fecha}`
+    );
+    window.open(`https://wa.me/5491136888220?text=${mensaje}`, '_blank');
+
+    alert('¡Pedido confirmado! Te llegó por WhatsApp');
     cerrarCheckout();
     actualizarContadorCarrito();
 }
