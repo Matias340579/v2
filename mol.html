@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mol.css">
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCtca6GYsf4zvFTxPYaERdDHi-wF6AWOLc",
-            authDomain: "mundo3d-72c5a.firebaseapp.com",
-            projectId: "mundo3d-72c5a",
-            storageBucket: "mundo3d-72c5a.firebasestorage.app",
-            messagingSenderId: "736628567362",
-            appId: "1:736628567362:web:8475898f3f9471f7336cdb",
-            measurementId: "G-C1V1DJ1BRD"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-        const historialRef = db.ref('pedidos');
-    </script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyCtca6GYsf4zvFTxPYaERdDHi-wF6AWOLc",
+        authDomain: "mundo3d-72c5a.firebaseapp.com",
+        projectId: "mundo3d-72c5a",
+        storageBucket: "mundo3d-72c5a.firebasestorage.app",
+        messagingSenderId: "736628567362",
+        appId: "1:736628567362:web:8475898f3f9471f7336cdb",
+        measurementId: "G-C1V1DJ1BRD"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const historialRef = db.ref('pedidos');
+</script>
 </head>
 <body>
 
@@ -1033,19 +1033,26 @@ function finalizarCompra() {
     const telefono = document.getElementById('inputTelefono').value.trim();
     const cp = document.getElementById('inputCP').value.trim();
     const localidad = document.getElementById('inputLocalidad').value.trim();
-    if (!nombre||!apellido||!telefono||!cp||!localidad) {alert('Complete todos los campos');return;}
-    const carrito = JSON.parse(localStorage.getItem('carrito')||'[]');
-    const total = carrito.reduce((s,item)=>s+item.precio,0);
+
+    if (!nombre || !apellido || !telefono || !cp || !localidad) {
+        alert('Complete todos los campos');
+        return;
+    }
+
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+
     const pedido = {
         id: Date.now(),
         fecha: new Date().toLocaleString('es-AR'),
-        cliente: {nombre,apellido,telefono,cp,localidad},
+        cliente: { nombre, apellido, telefono, cp, localidad },
         productos: carrito,
         total: total
     };
+
     historialRef.push(pedido);
     localStorage.removeItem('carrito');
-    alert('¡Pedido confirmado! Gracias '+nombre);
+    alert('¡Pedido confirmado! Gracias ' + nombre);
     cerrarCheckout();
     actualizarContadorCarrito();
 }
@@ -1065,6 +1072,7 @@ document.addEventListener('keydown', e => {
 function mostrarHistorial() {
     const cont = document.getElementById('listaPedidos');
     cont.innerHTML = 'Cargando pedidos...';
+
     historialRef.once('value').then(snapshot => {
         const historial = [];
         snapshot.forEach(child => {
@@ -1072,11 +1080,13 @@ function mostrarHistorial() {
             p.firebaseKey = child.key;
             historial.push(p);
         });
+
         cont.innerHTML = '';
-        if (historial.length===0) {
+        if (historial.length === 0) {
             cont.innerHTML = '<p style="text-align:center;color:#777;">No hay pedidos aún</p>';
             return;
         }
+
         historial.forEach(p => {
             const div = document.createElement('div');
             div.style = 'background:white;margin:15px 0;padding:18px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);cursor:pointer;';
@@ -1088,22 +1098,26 @@ function mostrarHistorial() {
                 <p style="margin:8px 0;color:#333;">Tel: ${p.cliente.telefono} • ${p.cliente.localidad} (${p.cliente.cp})</p>
                 <p style="margin:5px 0;font-weight:bold;color:#006eff;">Total: $${p.total} ARS • ${p.productos.length} producto(s)</p>
             `;
+
             div.onclick = e => {
-                if (e.target.tagName==='BUTTON') return;
+                if (e.target.tagName === 'BUTTON') return;
                 const detalles = div.querySelector('.detalles');
-                if (detalles) {detalles.remove();return;}
+                if (detalles) { detalles.remove(); return; }
+
                 const lista = document.createElement('div');
                 lista.className = 'detalles';
                 lista.style = 'margin-top:15px;padding:15px;background:#f8f9fa;border-radius:8px;border-left:4px solid #006eff;';
+
                 let html = '<strong style="color:#170942;">Productos:</strong><br><br>';
-                p.productos.forEach((pr,idx) => {
-                    const i = modelos3D.findIndex(m=>m.nombre===pr.nombre);
-                    if (i!==-1) {
+                p.productos.forEach((pr, idx) => {
+                    const i = modelos3D.findIndex(m => m.nombre === pr.nombre);
+                    if (i !== -1) {
                         html += `${idx+1}. <strong style="color:#006eff;cursor:pointer;text-decoration:underline;" 
-                            onclick="event.stopPropagation();modeloActualEnModal=${i};abrirModalModelo(${i});document.getElementById('modalHistorial').classList.remove('abierto');document.body.style.overflow='hidden';">
+                            onclick="event.stopPropagation(); modeloActualEnModal=${i}; abrirModalModelo(${i}); document.getElementById('modalHistorial').classList.remove('abierto'); document.body.style.overflow='hidden';">
                             ${pr.nombre}</strong> — $${pr.precio} ARS<br>`;
                     } else html += `${idx+1}. <strong>${pr.nombre}</strong> — $${pr.precio} ARS<br>`;
                 });
+
                 const btn = document.createElement('button');
                 btn.textContent = 'Eliminar este pedido';
                 btn.style = 'margin-top:15px;background:#e74c3c;color:white;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:bold;';
@@ -1114,6 +1128,7 @@ function mostrarHistorial() {
                         mostrarHistorial();
                     }
                 };
+
                 lista.innerHTML = html;
                 lista.appendChild(btn);
                 div.appendChild(lista);
@@ -1122,7 +1137,6 @@ function mostrarHistorial() {
         });
     }).catch(() => cont.innerHTML = '<p style="color:red;text-align:center;">Error cargando historial</p>');
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     cargarGaleriaModelos3D();
     actualizarContadorCarrito();
