@@ -51,16 +51,38 @@
     </section>
     <section class="modelos-3d-section">
     <div class="galeria-controles">
-        <input type="text" id="buscadorModelos" placeholder="Buscar modelo..." class="input-busqueda">
-        <div class="filtros-categoria">
-            <button class="filtro-btn activo" data-categoria="todos">Todos</button>
-            <button class="filtro-btn" data-categoria="Velador">Veladores</button>
-            <button class="filtro-btn" data-categoria="Maceta">Macetas</button>
-            <button class="filtro-btn" data-categoria="Decoracion">Decoración</button>
-            <button class="filtro-btn" data-categoria="Juguetes">Juguetes</button>
-            <button class="filtro-btn" data-categoria="Accesorio">Accesorios</button>
+    <input type="text" id="buscadorModelos" placeholder="Buscar modelo..." class="input-busqueda">
+
+    <div class="filtro-select-movil">
+        <button id="btnFiltroMovil" class="btn-filtro-movil">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/>
+            </svg>
+            Filtrar por categoría
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                <polyline points="6 9 12 15 18 9"/>
+            </svg>
+        </button>
+
+        <div id="menuFiltroMovil" class="menu-filtro-movil">
+            <button class="filtro-movil-item activo" data-categoria="todos">Todos los modelos</button>
+            <button class="filtro-movil-item" data-categoria="Velador">Veladores</button>
+            <button class="filtro-movil-item" data-categoria="Maceta">Macetas</button>
+            <button class="filtro-movil-item" data-categoria="Decoracion">Decoración</button>
+            <button class="filtro-movil-item" data-categoria="Juguetes">Juguetes</button>
+            <button class="filtro-movil-item" data-categoria="Accesorio">Accesorios</button>
         </div>
     </div>
+
+    <div class="filtros-categoria desktop">
+        <button class="filtro-btn activo" data-categoria="todos">Todos</button>
+        <button class="filtro-btn" data-categoria="Velador">Veladores</button>
+        <button class="filtro-btn" data-categoria="Maceta">Macetas</button>
+        <button class="filtro-btn" data-categoria="Decoracion">Decoración</button>
+        <button class="filtro-btn" data-categoria="Juguetes">Juguetes</button>
+        <button class="filtro-btn" data-categoria="Accesorio">Accesorios</button>
+    </div>
+</div>
     <article class="galeria-modelos-3d" id="galeriaModelos3D"></article>
 </section>
 </main>
@@ -1301,6 +1323,31 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarContadorCarrito();
     document.getElementById('cart-button').addEventListener('click', abrirModalCarrito);
 });
+
+    <script>
+document.getElementById('btnFiltroMovil').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('menuFiltroMovil').classList.toggle('abierto');
+});
+
+document.addEventListener('click', function() {
+    document.getElementById('menuFiltroMovil').classList.remove('abierto');
+});
+
+document.querySelectorAll('.filtro-movil-item').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.filtro-movil-item').forEach(b => b.classList.remove('activo'));
+        this.classList.add('activo');
+        const categoria = this.dataset.categoria;
+        const busqueda = document.getElementById('buscadorModelos').value;
+        cargarGaleriaModelos3D(categoria, busqueda);
+        document.getElementById('menuFiltroMovil').classList.remove('abierto');
+        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
+        const btnEscritorio = document.querySelector(`.filtro-btn[data-categoria="${categoria}"]`);
+        if (btnEscritorio) btnEscritorio.classList.add('activo');
+    });
+});
+</script>
 </script>
 
 </body>
