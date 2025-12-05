@@ -23,7 +23,6 @@
 </script>
 </head>
 <body>
-
 <header class="header-fijo">
     <a href="f1.html" class="boton-volver">
 <a href="https://wa.me/5491136888220" class="boton-volver" target="_blank">
@@ -44,49 +43,25 @@
         </button>
     </div>
 </header>
-
 <main class="main-con-header">
     <section class="bienvenida">
         <p>Explorá nuestra galería de modelos 3D</p>
     </section>
     <section class="modelos-3d-section">
     <div class="galeria-controles">
-    <input type="text" id="buscadorModelos" placeholder="Buscar modelo..." class="input-busqueda">
-
-    <div class="filtro-select-movil">
-        <button id="btnFiltroMovil" class="btn-filtro-movil">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-                <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/>
-            </svg>
-            Filtrar por categoría
-            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
-                <polyline points="6 9 12 15 18 9"/>
-            </svg>
-        </button>
-
-        <div id="menuFiltroMovil" class="menu-filtro-movil">
-            <button class="filtro-movil-item activo" data-categoria="todos">Todos los modelos</button>
-            <button class="filtro-movil-item" data-categoria="Velador">Veladores</button>
-            <button class="filtro-movil-item" data-categoria="Maceta">Macetas</button>
-            <button class="filtro-movil-item" data-categoria="Decoracion">Decoración</button>
-            <button class="filtro-movil-item" data-categoria="Juguetes">Juguetes</button>
-            <button class="filtro-movil-item" data-categoria="Accesorio">Accesorios</button>
+        <input type="text" id="buscadorModelos" placeholder="Buscar modelo..." class="input-busqueda">
+        <div class="filtros-categoria">
+            <button class="filtro-btn activo" data-categoria="todos">Todos</button>
+            <button class="filtro-btn" data-categoria="Velador">Veladores</button>
+            <button class="filtro-btn" data-categoria="Maceta">Macetas</button>
+            <button class="filtro-btn" data-categoria="Decoracion">Decoración</button>
+            <button class="filtro-btn" data-categoria="Juguetes">Juguetes</button>
+            <button class="filtro-btn" data-categoria="Accesorio">Accesorios</button>
         </div>
     </div>
-
-    <div class="filtros-categoria desktop">
-        <button class="filtro-btn activo" data-categoria="todos">Todos</button>
-        <button class="filtro-btn" data-categoria="Velador">Veladores</button>
-        <button class="filtro-btn" data-categoria="Maceta">Macetas</button>
-        <button class="filtro-btn" data-categoria="Decoracion">Decoración</button>
-        <button class="filtro-btn" data-categoria="Juguetes">Juguetes</button>
-        <button class="filtro-btn" data-categoria="Accesorio">Accesorios</button>
-    </div>
-</div>
     <article class="galeria-modelos-3d" id="galeriaModelos3D"></article>
 </section>
 </main>
-
 <div id="modalModelo3D" class="modal-modelo-3d">
   <div class="modal-contenido">
     <div class="modal-encabezado">
@@ -97,22 +72,18 @@
       </button>
       <h2 id="modalTituloModelo">Modelo</h2>
     </div>
-
     <div class="modal-cuerpo">
       <div class="modal-imagen">
         <img id="modalImagenModelo" src="" alt="">
         <div class="etiqueta-categoria" id="modalCategoriaTag"></div>
       </div>
-
       <div class="modal-info">
         <div class="precio-destacado">
           <span class="precio-simbolo">$</span>
           <span id="modalPrecioModelo">0</span>
           <span class="precio-moneda">ARS</span>
         </div>
-
-        
-
+      
         <div class="seccion-info">
           <h3>
             <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
@@ -123,7 +94,6 @@
           </h3>
           <ul id="modalEspecificaciones"></ul>
         </div>
-
         <div class="seccion-info">
           <h3>
             <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
@@ -134,7 +104,6 @@
           </h3>
           <ul id="modalDetalles"></ul>
         </div>
-
         <button class="boton-agregar-modal" onclick="agregarAlCarritoDesdeModal()">
           <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
             <circle cx="9" cy="21" r="2"/>
@@ -143,7 +112,6 @@
           </svg>
           Agregar al Carrito
         </button>
-
         <a href="https://wa.me/5491136888220" target="_blank" class="boton-contacto-modal">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -154,7 +122,6 @@
     </div>
   </div>
 </div>
-
 <div id="modalCarrito" class="modal-modelo-3d">
     <div class="modal-contenido" style="max-width: 500px;">
         <div class="modal-encabezado">
@@ -163,7 +130,6 @@
         </div>
         <div class="carrito-cuerpo">
             <div id="cart-items-list" class="cart-items"></div>
-
             <div class="cart-total-resumen">
                 <div class="cart-total-line">
                     <span>Subtotal:</span>
@@ -174,7 +140,6 @@
                     <strong class="precio-final">$<span id="cart-total-price">0</span> ARS</strong>
                 </div>
             </div>
-
             <div class="cart-acciones">
                 <button onclick="abrirCheckout()" class="boton-principal-cart">
                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
@@ -195,7 +160,6 @@
         </div>
     </div>
 </div>
-
 <div id="modalCheckout" class="modal-modelo-3d">
     <div class="modal-contenido" style="max-width:500px;">
         <div class="modal-encabezado">
@@ -212,7 +176,6 @@
         </div>
     </div>
 </div>
-
 <div id="modalHistorial" class="modal-modelo-3d">
     <div class="modal-contenido" style="max-width:900px;">
         <div class="modal-encabezado">
@@ -226,7 +189,6 @@
 </div>
 <script>
 let modeloActualEnModal = null;
-
 const modelos3D = [
     {
         nombre: "Velador Luna Amarilla",
@@ -424,7 +386,7 @@ const modelos3D = [
             "Categoría": "Decoracion",
         }
     },
-    
+  
     {
         nombre: "Labubu",
         precio: 5000,
@@ -438,8 +400,8 @@ const modelos3D = [
         detalles: {
             "Categoría": "Accesorio",
         }
-    }, 
-    
+    },
+  
     {
         nombre: "Roca Para Pecera",
         precio: 4000,
@@ -585,7 +547,7 @@ const modelos3D = [
         precio: 6000,
         imagen: "coraE.jpg",
         especificaciones: {
-            "Tamaño": " x  x  cm",
+            "Tamaño": " x x cm",
             "Relleno": "20%",
             "Paredes": "2",
             "Material": "PLA",
@@ -595,7 +557,7 @@ const modelos3D = [
         }
     },
     {
-        nombre: "Chimuelo 2D", 
+        nombre: "Chimuelo 2D",
         precio: 3500,
         imagen: "2dchimu.jpg",
         especificaciones: {
@@ -755,7 +717,7 @@ const modelos3D = [
         ,
         imagen: "catT.jpg",
         especificaciones: {
-            "Tamaño": " x  x  cm",
+            "Tamaño": " x x cm",
             "Relleno": "20%",
             "Paredes": "2",
             "Material": "PLA",
@@ -839,7 +801,7 @@ const modelos3D = [
         precio: 2500,
         imagen: "reno.jpg",
         especificaciones: {
-            "Tamaño": "5 x 5 x 10  cm",
+            "Tamaño": "5 x 5 x 10 cm",
             "Relleno": "20%",
             "Paredes": "2",
             "Material": "PLA",
@@ -1016,31 +978,27 @@ const modelos3D = [
             "Categoría": "Decoracion",
         }
     },
-    
-    
-    
-    
+  
+  
+  
+  
 ];
-
 function cargarGaleriaModelos3D(filtro = 'todos', busqueda = '') {
     const cont = document.getElementById('galeriaModelos3D');
     cont.innerHTML = '';
-    
+  
     let modelosFiltrados = modelos3D;
-
     if (filtro !== 'todos') {
-        modelosFiltrados = modelos3D.filter(m => 
+        modelosFiltrados = modelos3D.filter(m =>
             m.detalles && m.detalles.Categoría && m.detalles.Categoría.includes(filtro)
         );
     }
-
     if (busqueda) {
         const term = busqueda.toLowerCase();
-        modelosFiltrados = modelosFiltrados.filter(m => 
+        modelosFiltrados = modelosFiltrados.filter(m =>
             m.nombre.toLowerCase().includes(term)
         );
     }
-
     if (modelosFiltrados.length === 0) {
         cont.innerHTML = `
             <div class="no-resultados">
@@ -1053,15 +1011,13 @@ function cargarGaleriaModelos3D(filtro = 'todos', busqueda = '') {
         `;
         return;
     }
-
     modelosFiltrados.forEach((m, i) => {
         const card = document.createElement('div');
         card.className = 'modelo-3d-card';
         card.onclick = () => abrirModalModelo(modelos3D.indexOf(m));
-        
+      
         const categoria = m.detalles?.Categoría || 'Sin categoría';
         const categoriaLimpia = categoria.split('-')[0].trim();
-
         card.innerHTML = `
             <img src="${m.imagen}" alt="${m.nombre}">
             <div class="info-card">
@@ -1073,43 +1029,35 @@ function cargarGaleriaModelos3D(filtro = 'todos', busqueda = '') {
         cont.appendChild(card);
     });
 }
-
 function abrirModalModelo(i) {
   modeloActualEnModal = i;
   const m = modelos3D[i];
   document.getElementById('modalTituloModelo').textContent = m.nombre;
   document.getElementById('modalImagenModelo').src = m.imagen;
   document.getElementById('modalPrecioModelo').textContent = m.precio;
-  
   const categoria = m.detalles?.Categoría?.split('-')[0].trim() || 'Producto';
   document.getElementById('modalCategoriaTag').textContent = categoria;
-
-  const specs = document.getElementById('modalEspecificaciones'); 
+  const specs = document.getElementById('modalEspecificaciones');
   specs.innerHTML = '';
   for (const [k,v] of Object.entries(m.especificaciones||{})) {
     specs.innerHTML += `<li><strong>${k}:</strong> <span>${v}</span></li>`;
   }
-
-  const det = document.getElementById('modalDetalles'); 
+  const det = document.getElementById('modalDetalles');
   det.innerHTML = '';
   for (const [k,v] of Object.entries(m.detalles||{})) {
     if (k !== 'Categoría') det.innerHTML += `<li><strong>${k}:</strong> <span>${v}</span></li>`;
   }
-
   document.getElementById('modalModelo3D').classList.add('abierto');
   document.body.style.overflow = 'hidden';
 }
-
 function cerrarModalModelo() {
     document.getElementById('modalModelo3D').classList.remove('abierto');
     document.body.style.overflow = 'auto';
 }
-
 function actualizarContadorCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')||'[]');
     document.getElementById('cart-count').textContent = carrito.length;
 }
-
 function abrirModalCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')||'[]');
     const lista = document.getElementById('cart-items-list');
@@ -1134,12 +1082,10 @@ function abrirModalCarrito() {
     document.getElementById('modalCarrito').classList.add('abierto');
     document.body.style.overflow = 'hidden';
 }
-
 function cerrarModalCarrito() {
     document.getElementById('modalCarrito').classList.remove('abierto');
     document.body.style.overflow = 'auto';
 }
-
 function removerDelCarrito(i) {
     let carrito = JSON.parse(localStorage.getItem('carrito')||'[]');
     carrito.splice(i,1);
@@ -1147,7 +1093,6 @@ function removerDelCarrito(i) {
     actualizarContadorCarrito();
     abrirModalCarrito();
 }
-
 function vaciarCarrito() {
     if (confirm('¿Vaciar todo el carrito?')) {
         localStorage.removeItem('carrito');
@@ -1155,7 +1100,6 @@ function vaciarCarrito() {
         abrirModalCarrito();
     }
 }
-
 function agregarAlCarritoDesdeModal() {
     if (modeloActualEnModal===null) return;
     const m = modelos3D[modeloActualEnModal];
@@ -1166,7 +1110,6 @@ function agregarAlCarritoDesdeModal() {
     cerrarModalModelo();
     actualizarContadorCarrito();
 }
-
 function abrirCheckout() {
     const carrito = JSON.parse(localStorage.getItem('carrito')||'[]');
     if (carrito.length===0) {alert('El carrito está vacío');return;}
@@ -1174,27 +1117,22 @@ function abrirCheckout() {
     document.getElementById('modalCheckout').classList.add('abierto');
     document.body.style.overflow = 'hidden';
 }
-
 function cerrarCheckout() {
     document.getElementById('modalCheckout').classList.remove('abierto');
     document.body.style.overflow = 'auto';
 }
-
 function finalizarCompra() {
     const nombre = document.getElementById('inputNombre').value.trim();
     const apellido = document.getElementById('inputApellido').value.trim();
     const telefono = document.getElementById('inputTelefono').value.trim();
     const cp = document.getElementById('inputCP').value.trim();
     const localidad = document.getElementById('inputLocalidad').value.trim();
-
     if (!nombre||!apellido||!telefono||!cp||!localidad) {
         alert('Complete todos los campos');
         return;
     }
-
     const carrito = JSON.parse(localStorage.getItem('carrito')||'[]');
     const total = carrito.reduce((s,i)=>s+i.precio,0);
-
     const pedido = {
         id: Date.now(),
         fecha: new Date().toLocaleString('es-AR'),
@@ -1202,22 +1140,18 @@ function finalizarCompra() {
         productos: carrito,
         total: total
     };
-
     historialRef.push(pedido);
     localStorage.removeItem('carrito');
-
     const mensaje = encodeURIComponent(
         `¡NUEVO PEDIDO!\n\n${nombre} ${apellido}\nTel: ${telefono}\n${localidad} (${cp})\n\nProductos:\n` +
         carrito.map(p=>`• ${p.nombre} - $${p.precio}`).join('\n') +
         `\n\nTOTAL: $${total} ARS\n${pedido.fecha}`
     );
     window.open(`https://wa.me/5491136888220?text=${mensaje}`, '_blank');
-
     alert('¡Pedido confirmado! Te llegó por WhatsApp');
     cerrarCheckout();
     actualizarContadorCarrito();
 }
-
 let codigoIngresado = '';
 document.addEventListener('keydown', e => {
     if (e.key>='0'&&e.key<='9') codigoIngresado += e.key;
@@ -1229,11 +1163,9 @@ document.addEventListener('keydown', e => {
         codigoIngresado='';
     } else codigoIngresado='';
 });
-
 function mostrarHistorial() {
     const cont = document.getElementById('listaPedidos');
     cont.innerHTML = 'Cargando pedidos...';
-
     historialRef.once('value').then(snapshot => {
         const historial = [];
         snapshot.forEach(child => {
@@ -1241,13 +1173,11 @@ function mostrarHistorial() {
             p.firebaseKey = child.key;
             historial.push(p);
         });
-
         cont.innerHTML = '';
         if (historial.length === 0) {
             cont.innerHTML = '<p style="text-align:center;color:#777;">No hay pedidos aún</p>';
             return;
         }
-
         historial.forEach(p => {
             const div = document.createElement('div');
             div.style = 'background:white;margin:15px 0;padding:18px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);cursor:pointer;';
@@ -1259,26 +1189,22 @@ function mostrarHistorial() {
                 <p style="margin:8px 0;color:#333;">Tel: ${p.cliente.telefono} • ${p.cliente.localidad} (${p.cliente.cp})</p>
                 <p style="margin:5px 0;font-weight:bold;color:#006eff;">Total: $${p.total} ARS • ${p.productos.length} producto(s)</p>
             `;
-
             div.onclick = e => {
                 if (e.target.tagName === 'BUTTON') return;
                 const detalles = div.querySelector('.detalles');
                 if (detalles) { detalles.remove(); return; }
-
                 const lista = document.createElement('div');
                 lista.className = 'detalles';
                 lista.style = 'margin-top:15px;padding:15px;background:#f8f9fa;border-radius:8px;border-left:4px solid #006eff;';
-
                 let html = '<strong style="color:#170942;">Productos:</strong><br><br>';
                 p.productos.forEach((pr, idx) => {
                     const i = modelos3D.findIndex(m => m.nombre === pr.nombre);
                     if (i !== -1) {
-                        html += `${idx+1}. <strong style="color:#006eff;cursor:pointer;text-decoration:underline;" 
+                        html += `${idx+1}. <strong style="color:#006eff;cursor:pointer;text-decoration:underline;"
                             onclick="event.stopPropagation(); modeloActualEnModal=${i}; abrirModalModelo(${i}); document.getElementById('modalHistorial').classList.remove('abierto'); document.body.style.overflow='hidden';">
                             ${pr.nombre}</strong> — $${pr.precio} ARS<br>`;
                     } else html += `${idx+1}. <strong>${pr.nombre}</strong> — $${pr.precio} ARS<br>`;
                 });
-
                 const btn = document.createElement('button');
                 btn.textContent = 'Eliminar este pedido';
                 btn.style = 'margin-top:15px;background:#e74c3c;color:white;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:bold;';
@@ -1289,7 +1215,6 @@ function mostrarHistorial() {
                         mostrarHistorial();
                     }
                 };
-
                 lista.innerHTML = html;
                 lista.appendChild(btn);
                 div.appendChild(lista);
@@ -1303,12 +1228,10 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarContadorCarrito();
     document.getElementById('cart-button').addEventListener('click', abrirModalCarrito);
 });
-
 document.getElementById('buscadorModelos').addEventListener('input', function(e) {
     const filtroActivo = document.querySelector('.filtro-btn.activo').dataset.categoria;
     cargarGaleriaModelos3D(filtroActivo, e.target.value);
 });
-
 document.querySelectorAll('.filtro-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
@@ -1317,38 +1240,13 @@ document.querySelectorAll('.filtro-btn').forEach(btn => {
         cargarGaleriaModelos3D(this.dataset.categoria, busqueda);
     });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     cargarGaleriaModelos3D();
     actualizarContadorCarrito();
     document.getElementById('cart-button').addEventListener('click', abrirModalCarrito);
 });
-
-    <script>
-document.getElementById('btnFiltroMovil').addEventListener('click', function(e) {
-    e.stopPropagation();
-    document.getElementById('menuFiltroMovil').classList.toggle('abierto');
-});
-
-document.addEventListener('click', function() {
-    document.getElementById('menuFiltroMovil').classList.remove('abierto');
-});
-
-document.querySelectorAll('.filtro-movil-item').forEach(btn => {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.filtro-movil-item').forEach(b => b.classList.remove('activo'));
-        this.classList.add('activo');
-        const categoria = this.dataset.categoria;
-        const busqueda = document.getElementById('buscadorModelos').value;
-        cargarGaleriaModelos3D(categoria, busqueda);
-        document.getElementById('menuFiltroMovil').classList.remove('abierto');
-        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
-        const btnEscritorio = document.querySelector(`.filtro-btn[data-categoria="${categoria}"]`);
-        if (btnEscritorio) btnEscritorio.classList.add('activo');
-    });
-});
 </script>
-</script>
-
 </body>
 </html>
+ 
+guardalo
