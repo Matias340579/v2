@@ -78,4 +78,4 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--f);color:va
 @keyframes slideUpCart{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
 input,button,textarea{font-size:16px!important}
-img{loading:lazy}
+
